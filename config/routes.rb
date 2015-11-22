@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "/exec" => "exec#exec"
+
   resources :device_groups do
     resources :commands
     resources :devices
