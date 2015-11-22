@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151122053620) do
+ActiveRecord::Schema.define(version: 20151122054513) do
 
   create_table "commands", force: :cascade do |t|
     t.string   "actions_json"
-    t.string   "exec_key"
+    t.string   "name"
     t.integer  "device_group_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
