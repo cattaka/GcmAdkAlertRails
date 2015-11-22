@@ -18,7 +18,11 @@ class ExecController < ApplicationController
 				req.headers['Authorization'] = 'key=' + Rails.application.secrets.gcm_server_api_key
 				req.body = object.to_json
 			end
-			puts res.body
+			result = JSON.parse(res.body)
+			if result['canonical_ids'] > 0 then
+				device.gcm_id = result['results'][0]['registration_id']
+				device.save
+			end
 			results.push(res.body)
 		end
 
