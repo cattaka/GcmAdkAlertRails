@@ -9,5 +9,55 @@
   <%= @device_group.exec_key %>
 </p>
 
+<h2>Listing Devices</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Gcm</th>
+      <th>Enabled</th>
+      <th>Device group</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @device_group.devices.each do |device| %>
+      <tr>
+        <td><%= device.name %></td>
+        <td><%= device.gcm_id %></td>
+        <td><%= device.enabled %></td>
+        <td><%= device.device_group.name %></td>
+        <td><%= link_to 'Show', device_group_device_path(@device_group,device) %></td>
+        <td><%= link_to 'Edit', edit_device_group_device_path(@device_group,device) %></td>
+        <td><%= link_to 'Destroy', device_group_device_path(@device_group,device), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Listing Commands</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Actions json</th>
+      <th>Name</th>
+      <th>Device group</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @device_group.commands.each do |command| %>
+      <tr>
+        <td><%= command.actions_json %></td>
+        <td><%= command.name %></td>
+        <td><%= command.device_group.name %></td>
+        <td><%= link_to 'Show', [@device_group, command] %></td>
+        <td><%= link_to 'Edit', edit_device_group_command_path(@device_group, command) %></td>
+        <td><%= link_to 'Destroy', [@device_group, command], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_device_group_path(@device_group) %> |
 <%= link_to 'Back', device_groups_path %>
