@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :commands
   resources :device_groups do
+    resources :commands
     resources :devices
   end
 

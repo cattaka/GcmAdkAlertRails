@@ -12,8 +12,8 @@
 
 <p>
   <strong>Device group:</strong>
-  <%= @command.device_group %>
+  <%= @command.device_group.name %>
 </p>
 
-<%= link_to 'Edit', edit_command_path(@command) %> |
-<%= link_to 'Back', commands_path %>
+<%= link_to 'Edit', edit_device_group_command_path(@device_group, @command) %> |
+<%= link_to 'Back', device_group_commands_path(@device_group) %>

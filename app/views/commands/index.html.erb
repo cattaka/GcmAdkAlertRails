@@ -17,10 +17,10 @@
       <tr>
         <td><%= command.actions_json %></td>
         <td><%= command.exec_key %></td>
-        <td><%= command.device_group %></td>
-        <td><%= link_to 'Show', command %></td>
-        <td><%= link_to 'Edit', edit_command_path(command) %></td>
-        <td><%= link_to 'Destroy', command, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= command.device_group.name %></td>
+        <td><%= link_to 'Show', [@device_group, command] %></td>
+        <td><%= link_to 'Edit', edit_device_group_command_path(@device_group, command) %></td>
+        <td><%= link_to 'Destroy', [@device_group, command], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Command', new_command_path %>
+<%= link_to 'New Command', new_device_group_command_path(@device_group) %>

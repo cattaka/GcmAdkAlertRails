@@ -1,4 +1,6 @@
 class CommandsController < ApplicationController
+  before_filter :authenticate_user!
+  before_action :set_device_group
   before_action :set_command, only: [:show, :edit, :update, :destroy]
 
   # GET /commands
@@ -25,11 +27,12 @@ class CommandsController < ApplicationController
   # POST /commands.json
   def create
     @command = Command.new(command_params)
+    @command.device_group = @device_group
 
     respond_to do |format|
       if @command.save
-        format.html { redirect_to @command, notice: 'Command was successfully created.' }
-        format.json { render :show, status: :created, location: @command }
+        format.html { redirect_to [@device_group,@command], notice: 'Command was successfully created.' }
+        format.json { render :show, status: :created, location: [@device_group,@command] }
       else
         format.html { render :new }
         format.json { render json: @command.errors, status: :unprocessable_entity }
@@ -40,10 +43,12 @@ class CommandsController < ApplicationController
   # PATCH/PUT /commands/1
   # PATCH/PUT /commands/1.json
   def update
+    @command.device_group = @device_group
+
     respond_to do |format|
       if @command.update(command_params)
-        format.html { redirect_to @command, notice: 'Command was successfully updated.' }
-        format.json { render :show, status: :ok, location: @command }
+        format.html { redirect_to [@device_group,@command], notice: 'Command was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@device_group,@command] }
       else
         format.html { render :edit }
         format.json { render json: @command.errors, status: :unprocessable_entity }
@@ -56,7 +61,7 @@ class CommandsController < ApplicationController
   def destroy
     @command.destroy
     respond_to do |format|
-      format.html { redirect_to commands_url, notice: 'Command was successfully destroyed.' }
+      format.html { redirect_to device_group_commands_url(@device_group), notice: 'Command was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +72,12 @@ class CommandsController < ApplicationController
       @command = Command.find(params[:id])
     end
 
+    def set_device_group
+      @device_group = DeviceGroup.find(params[:device_group_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def command_params
-      params.require(:command).permit(:actions_json, :exec_key, :device_group_id)
+      params.require(:command).permit(:actions_json, :exec_key)
     end
 end

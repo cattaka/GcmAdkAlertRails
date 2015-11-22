@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @command %> |
-<%= link_to 'Back', commands_path %>
+<%= link_to 'Show', [@device_group, @command] %> |
+<%= link_to 'Back', device_group_commands_path(@device_group) %>
