@@ -42,7 +42,7 @@
       <th>Actions json</th>
       <th>Name</th>
       <th>Device group</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
   <tbody>
@@ -51,6 +51,7 @@
         <td><%= command.actions_json %></td>
         <td><%= command.name %></td>
         <td><%= command.device_group.name %></td>
+        <td><%= link_to 'Test', exec_path(key: @device_group.exec_key, cmd: command.name) %></td>
         <td><%= link_to 'Show', [@device_group, command] %></td>
         <td><%= link_to 'Edit', edit_device_group_command_path(@device_group, command) %></td>
         <td><%= link_to 'Destroy', [@device_group, command], method: :delete, data: { confirm: 'Are you sure?' } %></td>
