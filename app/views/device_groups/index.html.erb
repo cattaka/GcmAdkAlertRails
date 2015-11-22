@@ -13,7 +13,7 @@
   <tbody>
     <% @device_groups.each do |device_group| %>
       <tr>
-        <td><%= device_group.group_name %></td>
+        <td><%= device_group.name %></td>
         <td><%= link_to 'Show', device_group %></td>
         <td><%= link_to 'Edit', edit_device_group_path(device_group) %></td>
         <td><%= link_to 'Destroy', device_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>

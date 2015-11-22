@@ -18,7 +18,7 @@ class DeviceGroupsControllerTest < ActionController::TestCase
 
   test "should create device_group" do
     assert_difference('DeviceGroup.count') do
-      post :create, device_group: { group_name: @device_group.group_name }
+      post :create, device_group: { name: @device_group.name }
     end
 
     assert_redirected_to device_group_path(assigns(:device_group))
@@ -35,7 +35,7 @@ class DeviceGroupsControllerTest < ActionController::TestCase
   end
 
   test "should update device_group" do
-    patch :update, id: @device_group, device_group: { group_name: @device_group.group_name }
+    patch :update, id: @device_group, device_group: { name: @device_group.name }
     assert_redirected_to device_group_path(assigns(:device_group))
   end
 

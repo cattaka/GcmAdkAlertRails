@@ -1,10 +1,11 @@
 class DeviceGroupsController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_device_group, only: [:show, :edit, :update, :destroy]
 
   # GET /device_groups
   # GET /device_groups.json
   def index
-    @device_groups = DeviceGroup.all
+    @device_groups = DeviceGroup.where(user_id:current_user.id).order(:name)
   end
 
   # GET /device_groups/1
@@ -25,6 +26,7 @@ class DeviceGroupsController < ApplicationController
   # POST /device_groups.json
   def create
     @device_group = DeviceGroup.new(device_group_params)
+    @device_group.user_id = current_user.id
 
     respond_to do |format|
       if @device_group.save
@@ -40,6 +42,7 @@ class DeviceGroupsController < ApplicationController
   # PATCH/PUT /device_groups/1
   # PATCH/PUT /device_groups/1.json
   def update
+    @device_group.user_id = current_user.id
     respond_to do |format|
       if @device_group.update(device_group_params)
         format.html { redirect_to @device_group, notice: 'Device group was successfully updated.' }
@@ -69,6 +72,6 @@ class DeviceGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_group_params
-      params.require(:device_group).permit(:group_name)
+      params.require(:device_group).permit(:name)
     end
 end

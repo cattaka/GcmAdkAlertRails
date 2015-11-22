@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151122025835) do
+ActiveRecord::Schema.define(version: 20151122031805) do
 
   create_table "device_groups", force: :cascade do |t|
-    t.string   "group_name"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
