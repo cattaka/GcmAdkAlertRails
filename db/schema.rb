@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151122024502) do
+ActiveRecord::Schema.define(version: 20151122025835) do
+
+  create_table "device_groups", force: :cascade do |t|
+    t.string   "group_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
+  add_index "device_groups", ["user_id"], name: "index_device_groups_on_user_id"
+
+  create_table "devices", force: :cascade do |t|
+    t.string   "name"
+    t.string   "gcm_id"
+    t.boolean  "enabled"
+    t.integer  "device_group_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "devices", ["device_group_id"], name: "index_devices_on_device_group_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

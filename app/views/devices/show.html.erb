@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @device.name %>
+</p>
+
+<p>
+  <strong>Gcm:</strong>
+  <%= @device.gcm_id %>
+</p>
+
+<p>
+  <strong>Enabled:</strong>
+  <%= @device.enabled %>
+</p>
+
+<p>
+  <strong>Device group:</strong>
+  <%= @device.device_group %>
+</p>
+
+<%= link_to 'Edit', edit_device_path(@device) %> |
+<%= link_to 'Back', devices_path %>
