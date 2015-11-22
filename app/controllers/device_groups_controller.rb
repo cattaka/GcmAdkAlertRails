@@ -72,6 +72,6 @@ class DeviceGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_group_params
-      params.require(:device_group).permit(:name)
+      params.require(:device_group).permit(:name, :exec_key)
     end
 end

@@ -4,6 +4,10 @@
   <strong>Group name:</strong>
   <%= @device_group.name %>
 </p>
+<p>
+  <strong>Exec key:</strong>
+  <%= @device_group.exec_key %>
+</p>
 
 <%= link_to 'Edit', edit_device_group_path(@device_group) %> |
 <%= link_to 'Back', device_groups_path %>
