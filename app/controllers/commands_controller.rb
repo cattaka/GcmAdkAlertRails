@@ -2,6 +2,7 @@ class CommandsController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_device_group
   before_action :set_command, only: [:show, :edit, :update, :destroy]
+  before_action :check_owner
 
   # GET /commands
   # GET /commands.json
@@ -79,5 +80,9 @@ class CommandsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def command_params
       params.require(:command).permit(:actions_json, :name)
+    end
+
+    def check_owner
+      render json:{error: 'not found'}, :status => 422 if @device_group.user_id != current_user.id
     end
 end

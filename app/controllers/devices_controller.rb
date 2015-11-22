@@ -2,11 +2,12 @@ class DevicesController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_device_group
   before_action :set_device, only: [:show, :edit, :update, :destroy]
+  before_action :check_owner
 
   # GET /devices
   # GET /devices.json
   def index
-    @devices = Device.all
+    @devices = Device.where(device_group_id:params[:device_group_id])
   end
 
   # GET /devices/1
@@ -79,5 +80,9 @@ class DevicesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_params
       params.require(:device).permit(:name, :gcm_id, :enabled)
+    end
+
+    def check_owner
+      render json:{error: 'not found'}, :status => 422 if @device_group.user_id != current_user.id
     end
 end

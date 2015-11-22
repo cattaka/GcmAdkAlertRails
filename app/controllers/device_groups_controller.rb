@@ -1,6 +1,7 @@
 class DeviceGroupsController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_device_group, only: [:show, :edit, :update, :destroy]
+  before_action :check_owner, only: [:show, :edit, :update, :destroy]
 
   # GET /device_groups
   # GET /device_groups.json
@@ -73,5 +74,9 @@ class DeviceGroupsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_group_params
       params.require(:device_group).permit(:name, :exec_key)
+    end
+
+    def check_owner
+      render json:{error: 'not found'}, :status => 422 if @device_group.user_id != current_user.id
     end
 end
