@@ -44,6 +44,6 @@ class DevicesControllerTest < ActionController::TestCase
       delete :destroy, id: @device
     end
 
-    assert_redirected_to devices_path
+    assert_redirected_to device_group_devices_path
   end
 end

@@ -1,5 +1,6 @@
 class DevicesController < ApplicationController
   before_filter :authenticate_user!
+  before_action :set_device_group
   before_action :set_device, only: [:show, :edit, :update, :destroy]
 
   # GET /devices
@@ -26,11 +27,12 @@ class DevicesController < ApplicationController
   # POST /devices.json
   def create
     @device = Device.new(device_params)
+    @device.device_group = @device_group
 
     respond_to do |format|
       if @device.save
-        format.html { redirect_to @device, notice: 'Device was successfully created.' }
-        format.json { render :show, status: :created, location: @device }
+        format.html { redirect_to [@device_group, @device], notice: 'Device was successfully created.' }
+        format.json { render :show, status: :created, location: [@device_group, @device] }
       else
         format.html { render :new }
         format.json { render json: @device.errors, status: :unprocessable_entity }
@@ -41,9 +43,11 @@ class DevicesController < ApplicationController
   # PATCH/PUT /devices/1
   # PATCH/PUT /devices/1.json
   def update
+    @device.device_group = @device_group
+
     respond_to do |format|
       if @device.update(device_params)
-        format.html { redirect_to @device, notice: 'Device was successfully updated.' }
+        format.html { redirect_to [@device_group, @device], notice: 'Device was successfully updated.' }
         format.json { render :show, status: :ok, location: @device }
       else
         format.html { render :edit }
@@ -57,7 +61,7 @@ class DevicesController < ApplicationController
   def destroy
     @device.destroy
     respond_to do |format|
-      format.html { redirect_to devices_url, notice: 'Device was successfully destroyed.' }
+      format.html { redirect_to device_group_devices_path, notice: 'Device was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -68,8 +72,12 @@ class DevicesController < ApplicationController
       @device = Device.find(params[:id])
     end
 
+    def set_device_group
+      @device_group = DeviceGroup.find(params[:device_group_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_params
-      params.require(:device).permit(:name, :gcm_id, :enabled, :device_group_id)
+      params.require(:device).permit(:name, :gcm_id, :enabled)
     end
 end

@@ -1,4 +1,4 @@
-<%= form_for(@device) do |f| %>
+<%= form_for([@device_group, @device]) do |f| %>
   <% if @device.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h2>
@@ -22,10 +22,6 @@
   <div class="field">
     <%= f.label :enabled %><br>
     <%= f.check_box :enabled %>
-  </div>
-  <div class="field">
-    <%= f.label :device_group_id %><br>
-    <%= f.text_field :device_group_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

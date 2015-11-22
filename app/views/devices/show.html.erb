@@ -17,8 +17,8 @@
 
 <p>
   <strong>Device group:</strong>
-  <%= @device.device_group %>
+  <%= @device.device_group.name %>
 </p>
 
-<%= link_to 'Edit', edit_device_path(@device) %> |
-<%= link_to 'Back', devices_path %>
+<%= link_to 'Edit', edit_device_group_device_path(@device_group,@device) %> |
+<%= link_to 'Back', device_group_devices_path %>

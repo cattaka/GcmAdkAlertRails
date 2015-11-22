@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :devices
-  resources :device_groups
+  resources :device_groups do
+    resources :devices
+  end
 
   devise_for :users
   get 'home/index'
