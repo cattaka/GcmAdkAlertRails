@@ -1,13 +1,15 @@
 class ExecController < ApplicationController
 	def exec
 		key = params[:key]
-		command = Command.where(exec_key:key).first
+		cmd = params[:cmd]
+		device_group = DeviceGroup.where(exec_key:key).first
+		command = Command.where(device_group_id:device_group.id, name:cmd).first
 		object = {}
 		object['data'] = JSON.parse(command.actions_json)
 
 		results = []
 		uri = "https://gcm-http.googleapis.com"
-		command.device_group.devices.each do |device|
+		device_group.devices.each do |device|
 			object['to'] = device.gcm_id
 			client = Faraday::Connection.new(:url => uri)
 			res = client.post do |req|
