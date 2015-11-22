@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Actions json:</strong>
+  <%= @command.actions_json %>
+</p>
+
+<p>
+  <strong>Exec key:</strong>
+  <%= @command.exec_key %>
+</p>
+
+<p>
+  <strong>Device group:</strong>
+  <%= @command.device_group %>
+</p>
+
+<%= link_to 'Edit', edit_command_path(@command) %> |
+<%= link_to 'Back', commands_path %>

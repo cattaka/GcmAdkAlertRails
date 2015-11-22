@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  actions_json: MyString
+  exec_key: MyString
+  device_group_id: 
+
+two:
+  actions_json: MyString
+  exec_key: MyString
+  device_group_id: 

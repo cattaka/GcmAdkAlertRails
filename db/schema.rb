@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151122032228) do
+ActiveRecord::Schema.define(version: 20151122042224) do
+
+  create_table "commands", force: :cascade do |t|
+    t.string   "actions_json"
+    t.string   "exec_key"
+    t.integer  "device_group_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "commands", ["device_group_id"], name: "index_commands_on_device_group_id"
 
 # Could not dump table "device_groups" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
