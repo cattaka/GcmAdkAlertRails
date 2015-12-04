@@ -23,11 +23,26 @@ ActiveRecord::Schema.define(version: 20151122054513) do
 
   add_index "commands", ["device_group_id"], name: "index_commands_on_device_group_id"
 
-# Could not dump table "device_groups" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "device_groups", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id",    null: false
+    t.string   "exec_key"
+  end
 
-# Could not dump table "devices" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  add_index "device_groups", ["user_id"], name: "index_device_groups_on_user_id"
+
+  create_table "devices", force: :cascade do |t|
+    t.string   "name"
+    t.string   "gcm_id"
+    t.boolean  "enabled"
+    t.integer  "device_group_id", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "devices", ["device_group_id"], name: "index_devices_on_device_group_id"
 
   create_table "options", force: :cascade do |t|
   end
